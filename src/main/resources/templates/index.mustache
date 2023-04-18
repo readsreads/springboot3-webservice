@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>스프링 부트 웹서비스</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    {{>layout/header}}
+    <h1>스프링 부트로 시작하는 웹 서비스 Ver.2</h1>
+    <button type="button" class="btn btn-secondary" onclick="location.href='/posts/save'">등록</button>
+    {{#userName}}
+        Logged in as: {{userName}}
+        <button type="button" class="btn btn-secondary" onclick="location.href='/logout'">Logout</button>
+    {{/userName}}
+    {{^userName}}
+        <button type="button" class="btn btn-secondary" onclick="location.href='/oauth2/authorization/google'">Google Login</button>
+
+        <button type="button" class="btn btn-secondary" onclick="location.href='/oauth2/authorization/naver'">Naver Login</button>
+    {{/userName}}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="row">게시글번호</th>
+            <th scope="col">제목</th>
+            <th scope="col">작성자</th>
+            <th scope="col">최종수정일</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#posts}}
+            <tr>
+                <td>{{id}}</td>
+                <td onclick="location.href='/posts/update/{{id}}'">{{title}}</td>
+                <td>{{author}}</td>
+                <td>{{modifiedDate}}</td>
+            </tr>
+        {{/posts}}
+        </tbody>
+    </table>
+    {{>layout/footer}}
+</body>
+</html>
